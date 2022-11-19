@@ -17,18 +17,6 @@ ostream& operator << (ostream& out, const Relation<typex>& s) {
 
     }
     out << "}";
-    int i;
-    typename set <pair<typex, typex>>::iterator pi;
-    //out << "{";
-    for (pi = s.relations.begin(); pi != s.relations.end(); ++pi)
-    {
-        //if (pi == prev(s.root.end())) out << *pi;
-        //cout << s.relations.find(*pi).first << ", ";
-
-    }
-    //out << "}";
-    return out;
-
     return out;
 }
 
