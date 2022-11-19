@@ -1,5 +1,4 @@
 #include <iostream>
-#include "Relation.h"
 #include <vector>
 #include <set>
 #include <utility>
@@ -13,10 +12,21 @@ ostream& operator << (ostream& out, const Relation<typex>& s) {
     out << "{";
     for (ssi = s.root.begin(); ssi != s.root.end(); ++ssi)
     {
-        out << *ssi << ", ";
+        if (ssi == prev(s.root.end())) out << *ssi;
+        else out << *ssi << ", ";
 
     }
     out << "}";
+    int i;
+    typename set <pair<typex, typex>>::iterator pi;
+    //out << "{";
+    for (pi = s.relations.begin(); pi != s.relations.end(); ++pi)
+    {
+        //if (pi == prev(s.root.end())) out << *pi;
+        //cout << s.relations.find(*pi).first << ", ";
+
+    }
+    //out << "}";
     return out;
 
     return out;
@@ -48,16 +58,14 @@ int Relation<type>::cardinality() {
 }
 
 template <typename type>
-bool Relation<type>::add_element(type e1, type e2) {
+bool Relation<type>::add_element(pair<type, type> p) {
     int i;
 
-    if (root.count(e1) < 1 || root.count(e2) < 1)
+    if (root.count(p.first) < 1 || root.count(p.second) < 1)
         return false;
 
-    pair <type, type> p(e1, e2);
     relations.insert(p);
     size += 1;
-
 }
 
 template <typename type>
@@ -68,13 +76,23 @@ bool Relation<type>::add_to_set(type i) {
 }
 
 template <typename type>
-void Relation<type>::remove_element(type, type) {
+void Relation<type>::remove_element(pair<type, type> p) {
+    /*relations.erase(p);
+    typename set <pair<type, type>>::iterator pi;
+    for (pi = relations.begin(); pi != relations.end(); ++pi)
+    {
+        if (pi.count(pi.first) < 2 ) root.erase(pi.first);
+        if (pi.count(pi.second) < 2) root.erase(pi.second);
 
+    }
+    root.erase(p);
+    --size;*/
 }
 
 template <typename type>
-bool Relation<type>::is_member(type, type) {
-
+bool Relation<type>::is_member(pair <type, type> p) {
+    if (relations.count(p) > 0) return true;
+    return false;
 }
 
 template <typename type>
@@ -120,10 +138,18 @@ Relation<type>Relation<type>::combination() {
 
 int main() {
     Relation <int> R;
+    pair <int, int> p;
     R.add_to_set(15);
     R.add_to_set(7);
-    
-    R.add_element(15, 7);
+    R.add_to_set(8);
+    R.add_to_set(9);
+    R.add_to_set(6);
+
+    pair <int, int> p1(15,7);
+    pair <int, int> p2(6,9);
+    R.add_element(p1);
+    R.add_element(p2);
+
 
     cout << R << endl;
 
