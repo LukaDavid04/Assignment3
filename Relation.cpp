@@ -7,18 +7,17 @@
 
 using namespace std;
 
-template <typename type>
-ostream& operator <<(ostream& out, set<pair<type, type>>& s) {
-    // set<pair<type,type>>::iterator ssi;
-    // out << "{";
+template <typename typex>
+ostream& operator << (ostream& out, const Relation<typex>& s) {
+    typename set <typex>::iterator ssi;
+    out << "{";
+    for (ssi = s.root.begin(); ssi != s.root.end(); ++ssi)
+    {
+        out << *ssi << ", ";
 
-    // for (ssi = s.relations.begin(); ssi != s.relations.end(); ++ssi) 
-    // {
-    //     cout << *ssi << " ";
-    // }
-
-    // out << "}";
-
+    }
+    out << "}";
+    return out;
 
     return out;
 }
@@ -62,8 +61,10 @@ bool Relation<type>::add_element(type e1, type e2) {
 }
 
 template <typename type>
-bool Relation<type>::add_to_set(int i) {
-
+bool Relation<type>::add_to_set(type i) {
+    if (root.count(i) > 0) return false;
+    else root.insert(i);
+    return true;
 }
 
 template <typename type>
@@ -117,3 +118,14 @@ Relation<type>Relation<type>::combination() {
 
 }
 
+int main() {
+    Relation <int> R;
+    R.add_to_set(15);
+    R.add_to_set(7);
+    
+    R.add_element(15, 7);
+
+    cout << R << endl;
+
+    return 0;
+}

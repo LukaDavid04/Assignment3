@@ -17,7 +17,7 @@ public:
     ~Relation();
     int cardinality();
     bool add_element(type, type);
-    bool add_to_set(int);
+    bool add_to_set(type);
     void remove_element(type, type);
     bool is_member(type, type);
     bool equal(Relation);
@@ -30,8 +30,5 @@ public:
     Relation inverse();
     Relation combination();
     template <typename typex>
-    friend ostream& operator <<(ostream&, set<pair<typex, typex>>&);
-
-
-
+    friend ostream& operator << (ostream&, const Relation<typex>&);
 };
