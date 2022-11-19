@@ -8,7 +8,6 @@ using namespace std;
 
 template <typename typex>
 ostream& operator << (ostream& out, const Relation<typex>& s) {
-    // typename set <typex>::iterator si;
     typename set<pair<typex,typex>>::iterator it;
 
     out << "{";
@@ -16,13 +15,11 @@ ostream& operator << (ostream& out, const Relation<typex>& s) {
         cout << "(";
         cout << it->first << "," << it->second;
         cout << ")";
-        if (s.relations.size() > 1){
+        if (it != --s.relations.end()){
             cout << " ";
         }
     }   
     out << "}";
-    
-    
     return out;
 }
 
