@@ -3,11 +3,12 @@
 #include <vector>
 #include <set>
 #include <utility>
+#include "Relation.h"
 
 using namespace std;
 
-template <typename typex>
-ostream& operator <<(ostream& out, set<pair<typex,typex>>& s){
+template <typename type>
+ostream& operator <<(ostream& out, set<pair<type, type>>& s) {
     // set<pair<type,type>>::iterator ssi;
     // out << "{";
 
@@ -23,78 +24,92 @@ ostream& operator <<(ostream& out, set<pair<typex,typex>>& s){
 }
 
 template <typename type>
-Relation<type>::Relation(){
-    
+Relation<type>::Relation() {
+    int size = 0;
+    set <pair<type, type>> relations;
+    set <type> root;
 }
+
 template <typename type>
-Relation<type>::Relation(const Relation& r){
+Relation<type>::Relation(const Relation& r) {
     relations = r.relations;
+    root = r.root;
+    size = r.size;
 }
+
 template <typename type>
 Relation<type>::~Relation() {
     relations.clear();
-}
-template <typename type>
-int Relation<type>::cardinality(){
-    
-}
-template <typename type>
-bool Relation<type>::add_element(type, type){
-    
-}
-template <typename type>
-bool Relation<type>::add_to_set(int i){
-
-}
-template <typename type>
-void Relation<type>::remove_element(type, type){
-    
-}
-template <typename type>
-bool Relation<type>::is_member(type, type){
-    
+    root.clear();
 }
 
 template <typename type>
-bool Relation<type>::equal(Relation r){
-    
+int Relation<type>::cardinality() {
+    return size;
+}
+
+template <typename type>
+bool Relation<type>::add_element(type e1, type e2) {
+    int i;
+
+    if (root.count(e1) < 1 || root.count(e2)< 1)
+        return false;
+
+}
+
+template <typename type>
+bool Relation<type>::add_to_set(int i) {
+
+}
+
+template <typename type>
+void Relation<type>::remove_element(type, type) {
+
+}
+
+template <typename type>
+bool Relation<type>::is_member(type, type) {
+
+}
+
+template <typename type>
+bool Relation<type>::equal(Relation r) {
+
 }
 template <typename type>
-bool Relation<type>::symmetric(){
-    
+bool Relation<type>::symmetric() {
+
 }
 template <typename type>
-bool Relation<type>::asymmetric(){
-    
+bool Relation<type>::asymmetric() {
+
 }
 template <typename type>
-bool Relation<type>::reflexive(){
-    
+bool Relation<type>::reflexive() {
+
 }
 template <typename type>
-bool Relation<type>::irreflexive(){
-    
+bool Relation<type>::irreflexive() {
+
 }
 
 
 template <typename type>
-bool Relation<type>::transitive(){
-    
-}
-template <typename type>
-bool Relation<type>::is_function(){
-    
-}
-
-
-template <typename type>
-Relation<type>Relation<type>::inverse(){
+bool Relation<type>::transitive() {
 
 }
 template <typename type>
-Relation<type>Relation<type>::combination(){
+bool Relation<type>::is_function() {
 
 }
-int main(){
-    
+
+
+template <typename type>
+Relation<type>Relation<type>::inverse() {
+
 }
+template <typename type>
+Relation<type>Relation<type>::combination() {
+
+}
+
