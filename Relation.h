@@ -16,11 +16,11 @@ public:
     Relation(const Relation&);
     ~Relation();
     int cardinality();
-    bool add_element(pair <type, type>);
+    bool add_element(type, type);
     bool add_to_set(type);
-    void remove_element(pair <type, type>);
-    bool is_member(pair <type, type>);
-    bool equal(Relation);
+    void remove_element(type, type);
+    bool is_member(type, type);
+    bool operator ==(Relation);
     bool reflexive();
     bool irreflexive();
     bool symmetric();
