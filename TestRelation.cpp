@@ -10,6 +10,8 @@ using namespace std;
 
 int main() {
 	Relation <int> R();
+	//R.add_element(15, 7);
+
 
 	return 0;
 }

@@ -52,8 +52,12 @@ template <typename type>
 bool Relation<type>::add_element(type e1, type e2) {
     int i;
 
-    if (root.count(e1) < 1 || root.count(e2)< 1)
+    if (root.count(e1) < 1 || root.count(e2) < 1)
         return false;
+
+    pair <type, type> p(e1, e2);
+    relations.insert(p);
+    size += 1;
 
 }
 
