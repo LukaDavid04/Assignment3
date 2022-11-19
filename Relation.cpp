@@ -125,12 +125,18 @@ bool Relation<type>::add_to_set(type i) {
 int main() {
     Relation <int> R;
     pair <int, int> p;
+    pair <int, int> q;
+    p.first = 21;
+    p.second = 21;
+    q.first = 15;
+    q.second = 7;
+
     R.add_to_set(15);
     R.add_to_set(7);
     R.add_to_set(21);
     
-    R.add_element(15, 7);
-    R.add_element(21, 21);
+    R.add_element(p);
+    R.add_element(q);
 
     cout << R << endl;
 
