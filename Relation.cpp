@@ -89,18 +89,36 @@ bool Relation<type>::operator ==(Relation r) {
 }
 
 template <typename type>
-bool Relation<type>::symmetric() {
-	typename set <type>::iterator it;
+vector<type> Relation<type>::operator[](type x) {
+	typename set<pair<type, type>>::iterator it;
+	vector<type> v;
 
-	for (it = root.begin(); it != root.end(); it++) {
-		if (!is_member(*it, *it)) return false;
+	for (it = relations.begin(); it != relations.end(); it++) {
+		if (it->first == x) {
+			v.push_back(it->second);
+		}
+	}
+	return v;
+}
+
+template <typename type>
+bool Relation<type>::symmetric() {
+	typename set<pair<type, type>>::iterator it;
+
+	for (it = relations.begin(); it != relations.end(); it++) {
+		if (!is_member(it->second, it->first)) return false;
 	}
 	return true;
 }
 
 template <typename type>
 bool Relation<type>::asymmetric() {
+	typename set<pair<type, type>>::iterator it;
 
+	for (it = relations.begin(); it != relations.end(); it++) {
+		if (is_member(it->second, it->first) && it->first != it->second) return false;
+	}
+	return true;
 }
 
 template <typename type>
@@ -125,22 +143,75 @@ bool Relation<type>::irreflexive() {
 
 template <typename type>
 bool Relation<type>::transitive() {
+	typename set<pair<type, type>>::iterator it;
+	typename set<pair<type, type>>::iterator it2;
 
+
+	for (it = relations.begin(); it != relations.end(); it++) {
+		for (it2 = relations.begin(); it2 != relations.end(); it2++) {
+			if (it->second == it2->first) {
+				if (!is_member(it->first, it2->second)) return false;
+			}
+		}
+	}
+	return true;
 }
 
 template <typename type>
 bool Relation<type>::is_function() {
+	typename set<pair<type, type>>::iterator it;
+	typename set<pair<type, type>>::iterator it2;
 
+
+	for (it = relations.begin(); it != relations.end(); it++) {
+		for (it2 = relations.begin(); it2 != relations.end(); it2++) {
+			if (it->first == it2->first && it->second != it2->second) {
+				return false;
+			}
+		}
+	}
+	return true;
 }
 
 template <typename type>
 Relation<type>Relation<type>::inverse() {
+	typename set<pair<type, type>>::iterator it;
+	typename set<type>::iterator it2;
+	Relation <type> rev;
 
+	for (it2 = root.begin(); it2 != root.end(); it2++) {
+		rev.add_to_set(*it2);
+	}
+
+	for (it = relations.begin(); it != relations.end(); it++) {
+		rev.add_element(it->second, it->first);
+	}
+
+	return rev;
 }
 
 template <typename type>
-Relation<type>Relation<type>::combination() {
+Relation<type>Relation<type>::combination( Relation r) {
+	typename set<pair<type, type>>::iterator it;
+	typename set<pair<type, type>>::iterator it2;
+	typename set<type>::iterator it3;
 
+	Relation <type> result;
+
+	for (it3 = root.begin(); it3 != root.end(); it3++) {
+		result.add_to_set(*it3);
+	}
+	for (it3 = r.root.begin(); it3 != r.root.end(); it3++) {
+		result.add_to_set(*it3);
+	}
+
+	for (it = relations.begin(); it != relations.end(); it++) {
+		for (it2 = r.relations.begin(); it2 != r.relations.end(); it2++) {
+			if (it->second == it2->first) result.add_element(it->first, it2->second);
+		}
+	}
+
+	return result;
 }
 
 int main() {
@@ -272,79 +343,79 @@ int main() {
 	else cout << "symmetric - Test 3 - Failed!" << endl;
 
 	////Testing asymmetric
-	//r2.remove_element("banana", "apple");
-	//if (!r1.asymmetric()) cout << "asymmetric - Test 1 - Passed." << endl;
-	//else cout << "asymmetric - Test 1 - Failed!" << endl;
+	r2.remove_element("banana", "apple");
+	if (!r1.asymmetric()) cout << "asymmetric - Test 1 - Passed." << endl;
+	else cout << "asymmetric - Test 1 - Failed!" << endl;
 
-	//r2.remove_element("cherry", "apple");
-	//r2.remove_element("banana", "cherry");
-	//r2.add_element("cherry", "cherry");
-	//r2.add_element("apple", "apple");
-	//if (r2.asymmetric()) cout << "asymmetric - Test 2 - Passed." << endl;
-	//else cout << "asymmetric - Test 2 - Failed!" << endl;
+	r2.remove_element("cherry", "apple");
+	r2.remove_element("banana", "cherry");
+	r2.add_element("cherry", "cherry");
+	r2.add_element("apple", "apple");
+	if (r2.asymmetric()) cout << "asymmetric - Test 2 - Passed." << endl;
+	else cout << "asymmetric - Test 2 - Failed!" << endl;
 
-	//r2.add_element("banana", "apple");
-	//r2.add_element("apple", "banana");
-	//if (!r2.asymmetric()) cout << "asymmetric - Test 3 - Passed." << endl;
-	//else cout << "asymmetric - Test 3 - Failed!" << endl;
+	r2.add_element("banana", "apple");
+	r2.add_element("apple", "banana");
+	if (!r2.asymmetric()) cout << "asymmetric - Test 3 - Passed." << endl;
+	else cout << "asymmetric - Test 3 - Failed!" << endl;
 
 	////Testing transitive
-	//if (r1.transitive()) cout << "transitive - Test 1 - Passed." << endl;
-	//else cout << "transitive - Test 1 - Failed!" << endl;
+	if (r1.transitive()) cout << "transitive - Test 1 - Passed." << endl;
+	else cout << "transitive - Test 1 - Failed!" << endl;
 
-	//r2.add_element("cherry", "cherry");
-	//if (!r2.transitive()) cout << "transitive - Test 2 - Passed." << endl;
-	//else cout << "transitive - Test 2 - Failed!" << endl;
+	r2.add_element("cherry", "cherry");
+	if (!r2.transitive()) cout << "transitive - Test 2 - Passed." << endl;
+	else cout << "transitive - Test 2 - Failed!" << endl;
 
-	//r1.add_element("banana", "orange");
-	//if (!r1.transitive()) cout << "transitive - Test 3 - Passed." << endl;
-	//else cout << "transitive - Test 3 - Failed!" << endl;
+	r1.add_element("banana", "orange");
+	if (!r1.transitive()) cout << "transitive - Test 3 - Passed." << endl;
+	else cout << "transitive - Test 3 - Failed!" << endl;
 
 	////Testing is_funciton
-	//if (!r1.is_function()) cout << "is_function - Test 1 - Passed." << endl;
-	//else cout << "is_function - Test 1 - Failed!" << endl;
+	if (!r1.is_function()) cout << "is_function - Test 1 - Passed." << endl;
+	else cout << "is_function - Test 1 - Failed!" << endl;
 
-	//if (!r2.is_function()) cout << "is_function - Test 2 - Passed." << endl;
-	//else cout << "is_function - Test 2 - Failed!" << endl;
+	if (!r2.is_function()) cout << "is_function - Test 2 - Passed." << endl;
+	else cout << "is_function - Test 2 - Failed!" << endl;
 
-	//r2.remove_element("apple", "apple");
-	//r2.remove_element("apple", "banana");
-	//r2.remove_element("banana", "banana");
-	//r2.remove_element("cherry", "banana");
-	//if (r2.is_function()) cout << "is_function - Test 3 - Passed." << endl;
-	//else cout << "is_function - Test 3 - Failed!" << endl;
+	r2.remove_element("apple", "apple");
+	r2.remove_element("apple", "banana");
+	r2.remove_element("banana", "banana");
+	r2.remove_element("cherry", "banana");
+	if (r2.is_function()) cout << "is_function - Test 3 - Passed." << endl;
+	else cout << "is_function - Test 3 - Failed!" << endl;
 
-	//Relation <string> r3 = r1.inverse();
+	Relation <string> r3 = r1.inverse();
 
 	////Testing operator ==
-	//if (r3 == r2.inverse()) cout << "operator == - Test 1 - Passed." << endl;
-	//else cout << "operator == - Test 1 - Failed!" << endl;
+	if (r3 == r1.inverse()) cout << "operator == - Test 1 - Passed." << endl;
+	else cout << "operator == - Test 1 - Failed!" << endl;
 
-	//if (!(r1 == r2)) cout << "operator == - Test 2 - Passed." << endl;
-	//else cout << "operator == - Test 2 - Failed!" << endl;
+	if (!(r1 == r2)) cout << "operator == - Test 2 - Passed." << endl;
+	else cout << "operator == - Test 2 - Failed!" << endl;
 
 	////Testing operator []
-	//int i;
-	//vector <string> v = r1["apple"];
-	//if (v[0] == "apple" && v[1] == "banana" && v.size() == 2) cout << "operator [] - Test 1 - Passed." << endl;
-	//else cout << "operator [] - Test 1 - Failed!" << endl;
+	int i;
+	vector <string> v = r1["apple"];
+	if (v[0] == "apple" && v[1] == "banana" && v.size() == 2) cout << "operator [] - Test 1 - Passed." << endl;
+	else cout << "operator [] - Test 1 - Failed!" << endl;
 
-	//v = r2["orange"];
-	//if (v.size() == 0) cout << "operator [] - Test 2 - Passed." << endl;
-	//else cout << "operator [] - Test 2 - Failed!" << endl;
+	v = r2["orange"];
+	if (v.size() == 0) cout << "operator [] - Test 2 - Passed." << endl;
+	else cout << "operator [] - Test 2 - Failed!" << endl;
 
-	//Relation <string> r4 = r2.inverse();
-	//Relation <string> r5 = r1.combination(r2);
-	//Relation <string> r6 = r2.combination(r1);
+	Relation <string> r4 = r2.inverse();
+	Relation <string> r5 = r1.combination(r2);
+	Relation <string> r6 = r2.combination(r1);
 
-	//cout << "r1 = " << r1 << endl;
-	//cout << "r2 = " << r2 << endl;
+	cout << "r1 = " << r1 << endl;
+	cout << "r2 = " << r2 << endl;
 
-	//cout << "r1-inverse = " << r3 << endl;
-	//cout << "r2-inverse = " << r4 << endl;
+	cout << "r1-inverse = " << r3 << endl;
+	cout << "r2-inverse = " << r4 << endl;
 
-	//cout << "R1oR2 = " << r5 << endl;
-	//cout << "R2oR1 = " << r6 << endl;
+	cout << "R1oR2 = " << r5 << endl;
+	cout << "R2oR1 = " << r6 << endl;
 
 	/*Should be printed
 	r1 = { (apple, apple), (apple, banana), (banana, apple), (banana, banana), (banana, orange), (cherry, cherry), (orange, orange) }

@@ -21,6 +21,7 @@ public:
     void remove_element(type, type);
     bool is_member(type, type);
     bool operator ==(Relation);
+    vector<type> operator[](type x);
     bool reflexive();
     bool irreflexive();
     bool symmetric();
@@ -28,7 +29,7 @@ public:
     bool transitive();
     bool is_function();
     Relation inverse();
-    Relation combination();
+    Relation combination(Relation);
     template <typename typex>
     friend ostream& operator << (ostream&, const Relation<typex>&);
 };
