@@ -137,7 +137,7 @@ vector<type2> MappingRelation<type1, type2>::operator[](type1 x){
 }
 
  template <typename type1, typename type2>
- MappingRelation<type1, type2>& MappingRelation<type1, type2>::intersection(MappingRelation<type1, type2> r) {
+ MappingRelation<type1, type2> MappingRelation<type1, type2>::intersection(MappingRelation<type1, type2> r) {
      typename set<pair<type1, type2>>::iterator it;
      typename set<pair<type1, type2>>::iterator it2;
 
@@ -145,7 +145,7 @@ vector<type2> MappingRelation<type1, type2>::operator[](type1 x){
 
      for (it = relations.begin(); it != relations.end(); it++) {
          for (it2 = r.relations.begin(); it2 != r.relations.end(); it2++) {
-             if (it->first == it2->first && it->second == it2->second) result.relations.insert(it2->first, it2->second);
+             if (it->first == it2->first && it->second == it2->second) result.add_element(it2->first, it2->second);
          }
      }
 
@@ -168,7 +168,7 @@ vector<type2> MappingRelation<type1, type2>::operator[](type1 x){
  }
 
  template <typename type1, typename type2>
- MappingRelation<type1, type2>MappingRelation<type1, type2>::inverse() {
+ MappingRelation<type1, type2> MappingRelation<type1, type2>::inverse() {
      typename set<pair<type1, type2>>::iterator it;
 
      MappingRelation <type2, type1> rev;

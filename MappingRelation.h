@@ -28,7 +28,7 @@ public:
     MappingRelation& operator -(MappingRelation);
     vector<type2> operator[](type1);
     bool is_function();
-    MappingRelation& intersection(MappingRelation);
+    MappingRelation intersection(MappingRelation);
     MappingRelation inverse();
     MappingRelation combination();
     template <typename typex, typename typey>
