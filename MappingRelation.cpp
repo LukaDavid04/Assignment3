@@ -84,15 +84,10 @@ bool MappingRelation<type1, type2>::is_member(type1 x, type2 y) {
 
 template <typename type1, typename type2>
 bool MappingRelation<type1,type2>::operator ==(MappingRelation<type1, type2> x){
-    typename set<pair<type1, type2>>::iterator it;
-    typename set<pair<type1, type2>>::iterator it2;
-
-    for (it = x.relations.begin(); it != x.relations.end(); it++){
-        for (it2 = relations.begin(); it2 != relations.end(); it++){
-            if (it != relations.end()) return false;
-        }
+    if (x.relations == relations){
+        return true;
     }
-    return true;
+    return false;
 }
 
 template <typename type1, typename type2>
@@ -113,8 +108,19 @@ MappingRelation<type1, type2>& MappingRelation<type1,type2>::operator +(MappingR
 }
 
 template <typename type1, typename type2>
-MappingRelation<type1, type2>& MappingRelation<type1,type2>::operator -(MappingRelation<type1, type2>){
+MappingRelation<type1, type2>& MappingRelation<type1,type2>::operator -(MappingRelation<type1, type2> x){
+    typename set<pair<type1, type2>>::iterator it;
+    pair <type1, type2> p;
 
+    for (it = x.relations.begin(); it != x.relations.end(); it++){
+        
+        p.first = it->first;
+        p.second = it->second;
+
+        relations.erase(p);
+    } 
+
+    return (*this);
 }
 
 template <typename type1, typename type2>
