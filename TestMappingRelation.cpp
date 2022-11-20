@@ -106,46 +106,46 @@ int main()
 	else cout << "remove_element - Test 3 - Failed!" << endl;
 
 	// //Testing is_funciton
-	// if (!numbers.is_function()) cout << "is_function - Test 1 - Passed." << endl;
-	// else cout << "is_function - Test 1 - Failed!" << endl;
+	 if (!numbers.is_function()) cout << "is_function - Test 1 - Passed." << endl;
+	 else cout << "is_function - Test 1 - Failed!" << endl;
 
-	// if (nations.is_function()) cout << "is_function - Test 2 - Passed." << endl;
-	// else cout << "is_function - Test 2 - Failed!" << endl;
+	 if (nations.is_function()) cout << "is_function - Test 2 - Passed." << endl;
+	 else cout << "is_function - Test 2 - Failed!" << endl;
 
-	// if (ages.is_function()) cout << "is_function - Test 3 - Passed." << endl;
-	// else cout << "is_function - Test 3 - Failed!" << endl;
+	 if (ages.is_function()) cout << "is_function - Test 3 - Passed." << endl;
+	 else cout << "is_function - Test 3 - Failed!" << endl;
 
-	// MappingRelation <string, string> invnations = nations.inverse();
+	MappingRelation <string, string> invnations = nations.inverse();
 
 	// //Testing operator ==
-	// if (nations == invnations.inverse()) cout << "operator == - Test 1 - Passed." << endl;
-	// else cout << "operator == - Test 1 - Failed!" << endl;
+	 if (nations == invnations.inverse()) cout << "operator == - Test 1 - Passed." << endl;
+	 else cout << "operator == - Test 1 - Failed!" << endl;
 
-	// if (!(ages == numbers)) cout << "operator == - Test 2 - Passed." << endl;
-	// else cout << "operator == - Test 2 - Failed!" << endl;
+	 if (!(ages == numbers)) cout << "operator == - Test 2 - Passed." << endl;
+	 else cout << "operator == - Test 2 - Failed!" << endl;
 
-	// //Testing operator []
-	// vector <int> v = numbers["Germany"];
-	// if (v[0] == 7 && v[1] == 13 && v.size() == 2) cout << "operator [] - Test 1 - Passed." << endl;
-	// else cout << "operator [] - Test 1 - Failed!" << endl;
+	 //Testing operator []
+	 vector <int> v = numbers["Germany"];
+	 if (v[0] == 7 && v[1] == 13 && v.size() == 2) cout << "operator [] - Test 1 - Passed." << endl;
+	 else cout << "operator [] - Test 1 - Failed!" << endl;
 
-	// vector <string> names = invnations["Italy"];
-	// if (names.size() == 0) cout << "operator [] - Test 2 - Passed." << endl;
-	// else cout << "operator [] - Test 2 - Failed!" << endl;
+	 vector <string> names = invnations["Italy"];
+	 if (names.size() == 0) cout << "operator [] - Test 2 - Passed." << endl;
+	 else cout << "operator [] - Test 2 - Failed!" << endl;
 
 	//Testing operator +
 	if (nations3 == nations + nations2) cout << "operator + - Test 1 - Passed." << endl;
 	else cout << "operator + - Test 1 - Failed!" << endl;
 
-	if (nations3 == nations3 + nations ) cout << "operator + - Test 2 - Passed." << endl;
+	if (nations3 == nations3 + nations) cout << "operator + - Test 2 - Passed." << endl;
 	else cout << "operator + - Test 2 - Failed!" << endl;
 
-	// //Testing operator intersection
-	// if (nations4 == nations.intersection(nations2)) cout << "intersection - Test 1 - Passed." << endl;
-	// else cout << "intersection - Test 1 - Failed!" << endl;
+	 //Testing operator intersection
+	 if (nations4 == nations.intersection(nations2)) cout << "intersection - Test 1 - Passed." << endl;
+	 else cout << "intersection - Test 1 - Failed!" << endl;
 
-	// if (nations4 == nations.intersection(nations4)) cout << "intersection - Test 2 - Passed." << endl;
-	// else cout << "intersection - Test 2 - Failed!" << endl;
+	 if (nations4 == nations.intersection(nations4)) cout << "intersection - Test 2 - Passed." << endl;
+	 else cout << "intersection - Test 2 - Failed!" << endl;
 
 	//Testing operator -
 	if (nations5 == nations - nations2) cout << "operator - - Test 1 - Passed." << endl;
