@@ -181,25 +181,7 @@ vector<type2> MappingRelation<type1, type2>::operator[](type1 x){
      return rev;
  }
 
-// template <typename type1, typename type2>
-// MappingRelation<type1, type2>MappingRelation<type1, type2>::combination() {
-    
-// }
-
-// int main() {
-//     MappingRelation <int, int> R;
-
-//     pair <int, int> p;
-//     pair <int, int> p1(15,7);
-//     pair <int, int> p2(6,9);
-//     R.add_element(p1.first, p1.second);
-//     R.add_element(p2.first, p2.second);
-
-//     MappingRelation <int, int> P(R);
-
-//     cout << R << endl;
-//     cout << P << endl;
-
-
-//     return 0;
-// }
+template <typename type1, typename type2>
+MappingRelation<type1, type2>MappingRelation<type1, type2>::combination(MappingRelation r) {
+    return (*this + r);
+}

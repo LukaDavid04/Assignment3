@@ -30,7 +30,7 @@ public:
     bool is_function();
     MappingRelation intersection(MappingRelation);
     MappingRelation inverse();
-    MappingRelation combination();
+    MappingRelation combination(MappingRelation);
     template <typename typex, typename typey>
     friend ostream& operator << (ostream&, const MappingRelation<typex, typey>&);
 };
