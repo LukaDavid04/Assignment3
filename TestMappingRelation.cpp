@@ -141,7 +141,7 @@ int main()
 	else cout << "operator + - Test 2 - Failed!" << endl;
 
 	 //Testing operator intersection
-	 if (nations4 == nations.intersection(nations2)) cout << "intersection - Test 1 - Passed." << endl;
+	 if (nations2 == nations.intersection(nations2)) cout << "intersection - Test 1 - Passed." << endl;
 	 else cout << "intersection - Test 1 - Failed!" << endl;
 
 	 if (nations4 == nations.intersection(nations4)) cout << "intersection - Test 2 - Passed." << endl;
@@ -154,11 +154,11 @@ int main()
 	if (nations2 - nations == nations3 - nations) cout << "operator - - Test 2 - Passed." << endl;
 	else cout << "operator - - Test 2 - Failed!" << endl;
 
-	// cout << "nations = " << nations << endl;
-	// cout << "numbers = " << numbers << endl;
+	cout << "nations = " << nations << endl;
+	cout << "numbers = " << numbers << endl;
 
-	// cout << "nations-inverse = " << invnations << endl;
-	// cout << "ages = " << ages << endl;
+	cout << "nations-inverse = " << invnations << endl;
+	cout << "ages = " << ages << endl;
 
 	/*Should be printed
 	nations = { (Antoine Griezmann, France), (Christiano Ronaldo, Portugal), (Joshua Kimmich, Germany), (Lionel Messi, Argentina), (Mohamed Salah, Egypt), (Neymar, Brazil), (Thomas Muller, Germany) }
