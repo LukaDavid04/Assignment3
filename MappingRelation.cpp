@@ -183,5 +183,17 @@ vector<type2> MappingRelation<type1, type2>::operator[](type1 x){
 
 template <typename type1, typename type2>
 MappingRelation<type1, type2>MappingRelation<type1, type2>::combination(MappingRelation r) {
-    return (*this + r);
+    typename set<pair<type1, type2>>::iterator it;
+    typename set<pair<type1, type2>>::iterator it2;
+
+    MappingRelation <type2, type1> res;
+
+
+    for (it = relations.begin(); it != relations.end(); it++) {
+        for (it2 = r.relations.begin(); it2 != r.relations.end(); it++) {
+            if (it->second == it2->first) res.add_element(it->first, it2->second);
+        }
+    }
+
+    return res;
 }
